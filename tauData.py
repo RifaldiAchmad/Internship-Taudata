@@ -20,7 +20,7 @@ import folium #, plotly.express as px
 import plotly.graph_objects as go
 
 lemma_id = StemmerFactory().create_stemmer()
-slangS = pd.read_csv('data/slang.csv', header=None, index_col=0).squeeze().to_dict()
+slangS = pd.read_csv('/content/BERT/slang.csv', header=None, index_col=0).squeeze().to_dict()
 factory = StopWordRemoverFactory()
 stopWordsID = set(factory.get_stop_words())
 stopWordsEN = set(stopwords.words("english"))
