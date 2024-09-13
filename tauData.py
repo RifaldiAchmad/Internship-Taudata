@@ -36,7 +36,7 @@ def loadText(f_):
     sw = ff_.readlines(); ff_.close()
     return sw
 
-stopCustom = set([s.lower().strip() for s in loadText('data/stopwords_id.txt')])
+stopCustom = set([s.lower().strip() for s in loadText('/content/BERT/stopwords_id.txt')])
 stopWordsID = stopWordsID.union(stopCustom)
 stopCustom = 'desember des jan january januari sep september feb february \
     februari subscribe named video view all wa link'.split()
