@@ -50,7 +50,7 @@ def loadCorpus(lan = 'en'):
         from sklearn.feature_extraction.text import CountVectorizer
         from nltk.corpus import brown
         try:
-            f = open('data/corpusEN.pckl', 'rb')
+            f = open('/content/BERT/corpusEN.pckl', 'rb')
             corpus = pickle.load(f); f.close()
         except:
             categories = ['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware',
@@ -67,28 +67,28 @@ def loadCorpus(lan = 'en'):
             Brown = set([str(t).lower().strip() for t in brown.words()])
             corpus.update(Brown)
             corpus.update(stopWordsEN)
-            f = open('data/corpusEN.pckl', 'wb')
+            f = open('/content/BERT/corpusEN.pckl', 'wb')
             pickle.dump(corpus, f); f.close()
     elif lan.lower().strip() in ['id', 'indonesia', 'indonesian']:
         try:
-            f = open('data/corpusID.pckl', 'rb')
+            f = open('/content/BERT/corpusID.pckl', 'rb')
             corpus = pickle.load(f); f.close()
         except:
             corpus = stopWordsID
-            sw = loadText('data/stopwords_id.txt')
+            sw = loadText('/content/BERT/stopwords_id.txt')
             sw = set([w.lower().strip() for w in sw])
             corpus = corpus.union(sw)
             corpus = corpus.union(slangS.values())
             corpus = corpus.union(slangS.keys())
-            kd = loadText('data/kata_dasar_id.txt')
+            kd = loadText('/content/BERT/kata_dasar_id.txt')
             kd = set([k.split()[0].lower().strip() for k in kd])
             corpus = corpus.union(kd)
-            pos = set([k.lower().strip() for k in loadText('data/kataPosID.txt')])
+            pos = set([k.lower().strip() for k in loadText('/content/BERT/kataPosID.txt')])
             corpus = corpus.union(pos)
-            neg = set([k.lower().strip() for k in loadText('data/kataNegID.txt')])
+            neg = set([k.lower().strip() for k in loadText('/content/BERT/kataNegID.txt')])
             corpus = corpus.union(neg)
             mtc = []
-            for k in loadText('data/Indonesian_Manually_Tagged_Corpus.tsv'):
+            for k in loadText('/content/BERT/Indonesian_Manually_Tagged_Corpus.tsv'):
                 try:
                     w = k.split('\t')[0].lower().strip()
                     if len(w)>2:
@@ -97,7 +97,7 @@ def loadCorpus(lan = 'en'):
                     pass
             mtc = set([tok for tok in mtc if sum([1 for d in tok if d.isalpha()])==len(tok)])
             corpus.union(mtc)
-            f = open('data/corpusID.pckl', 'wb')
+            f = open('/content/BERT/corpusID.pckl', 'wb')
             pickle.dump(corpus, f); f.close()
     else:
         print('Language not supported')
